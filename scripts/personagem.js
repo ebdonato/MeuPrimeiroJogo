@@ -1,6 +1,6 @@
 class Personagem extends Animacao {
-    constructor(columnsSprite, linesSprite, imagem, posicaoXInicial, largura, altura, larguraSprite, alturaSprite, somPulo) {
-        super(columnsSprite, linesSprite, imagem, posicaoXInicial, largura, altura, larguraSprite, alturaSprite)
+    constructor(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, somPulo) {
+        super(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite)
 
         this.velocidadePulo = 0
         this.gravidade = 3
