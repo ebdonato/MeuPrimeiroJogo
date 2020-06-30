@@ -10,9 +10,15 @@ class Inimigo extends Animacao {
     move() {
         this.x -= this.velocidade
 
-        if (this.x < -this.largura - this.delay) {
+        if (this.x < -this.largura - this.delay - 100) {
             this.x = width
         }
 
+        //TODO melhorar como e qunado o inimigo volta para a posicão inicial
+
+    }
+
+    naoVisivel() {
+        return this.x < -this.largura
     }
 }
