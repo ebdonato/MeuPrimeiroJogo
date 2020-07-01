@@ -21,6 +21,10 @@ let cenas
 
 let botao
 
+let vidas
+
+let config
+
 const inimigos = []
 
 function preload() {
@@ -31,8 +35,12 @@ function preload() {
     imagemInimigo = loadImage('assets/gotinha.png')
     imagemInimigoGrande = loadImage('assets/troll.png')
     imagemInimigoVoador = loadImage('assets/gotinha-voadora.png')
+    imagemVida = loadImage('assets/coracao.png')
     somJogo = loadSound('assets/trilha_jogo.mp3')
     somPulo = loadSound('assets/somPulo.mp3')
+
+    config = loadJSON('config.json')
+    console.log(config)
 
     fonteTelaInicial = loadFont('assets/fonteTelaInicial.otf');
 
