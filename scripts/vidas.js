@@ -11,6 +11,10 @@ class Vidas {
         this.margemY = 30
     }
 
+    reset() {
+        this.quantidade = this.inicial
+    }
+
     draw() {
 
         for (let i = 0; i < this.quantidade; i++) {
@@ -31,7 +35,7 @@ class Vidas {
     }
 
     ganharVida() {
-        console.log('ganharVida')
+        
         if (this.quantidade < this.maximo) {
             this.quantidade++
         }

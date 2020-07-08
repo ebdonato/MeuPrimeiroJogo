@@ -1,7 +1,7 @@
 {
-    "config": {
-        "vidasMaxima": 5,
-        "vidasInicial": 3
+    "vidas": {
+        "maxima": 5,
+        "inicial": 3
     },
     
     "mapa": [

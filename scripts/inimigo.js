@@ -1,10 +1,15 @@
 class Inimigo extends Animacao {
-    constructor(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, velocidade = 10, numberOfSprite = 0) {
+    constructor(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, numberOfSprite = 0) {
         super(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, numberOfSprite)
 
-        this.velocidade = velocidade
+        this.velocidade = 0
      
-        this.x = posicaoXInicial
+    }
+
+    reset() {
+        this.velocidade = 0
+        this.x = this.xInicial
+        this.y = this.ground
     }
 
     move() {
@@ -12,8 +17,8 @@ class Inimigo extends Animacao {
 
     }
 
-    aparece() {
-        this.x = width
+    aparece(posicao) {
+        this.x = posicao
     }
 
     naoVisivel() {

@@ -1,64 +1,90 @@
 class Jogo {
-    constructor() {
+    constructor(cenarioInfo, personagemInfo, vidasInfo) {
         this.inimigoAtual = 0
         
         this.mapa = config.mapa
 
+        this.cenarioInfo = cenarioInfo
+
+        this.personagemInfo = personagemInfo
+
+        this.vidasInfo = vidasInfo
+
+        this.inimigos = []
+
+        this.botao = createButton("Jogar Novamente")
+
     }
 
     setup() {
-        cenario = new Cenario(imagemCenario, 2)
-        personagem = new Personagem(4, 4, imagemPersonagem, 0, 30, 110, 135, 220, 270, somPulo)
-        pontuacao = new Pontuacao()
-        const inimigo = new Inimigo(4, 7, imagemInimigo, width, 30, 52, 52, 104, 104)
-        const inimigoGrande = new Inimigo(5, 6, imagemInimigoGrande, width, 0, 200, 200, 400, 400, 10, 28)
-        const inimigoVoador = new Inimigo(3, 6, imagemInimigoVoador, width, 200, 100, 75, 200, 150, 25, 16)
+        this.cenario = new Cenario(this.cenarioInfo)
+        
+        this.personagem = new Personagem(
+            this.personagemInfo.linhas,
+            this.personagemInfo.colunas,
+            this.personagemInfo.imagem,
+            this.personagemInfo.x,
+            this.personagemInfo.y,
+            this.personagemInfo.largura,
+            this.personagemInfo.altura,
+            this.personagemInfo.larguraSprite,
+            this.personagemInfo.alturaSprite,
+            this.personagemInfo.som)
 
-        inimigos.push(inimigo)
-        inimigos.push(inimigoGrande)
-        inimigos.push(inimigoVoador)
+        this.pontuacao = new Pontuacao()
+        
+        this.vidas = new Vidas(this.vidasInfo.imagem, this.vidasInfo.maxima, this.vidasInfo.inicial)
+    }
 
-        vidas = new Vidas(imagemVida, config.config.vidasMaxima, config.config.vidasInicial)
+    adicionaInimigo(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, numberOfSprite = 0) {
+    
+        const inimigo = new Inimigo(columnsSprite, linesSprite, imagem, posicaoXInicial, posicaoYInicial, largura, altura, larguraSprite, alturaSprite, numberOfSprite)
+
+        this.inimigos.push(inimigo)
     }
 
     draw() {
-        cenario.exibe()
-        cenario.move()
+        this.cenario.exibe()
+        this.cenario.move()
 
-        vidas.draw()
+        this.vidas.draw()
 
-        personagem.exibe()
-        personagem.aplicaGravidade()
+        this.personagem.exibe()
+        this.personagem.aplicaGravidade()
 
-        pontuacao.exibe()
-        pontuacao.incrementa()
+        this.pontuacao.exibe()
+        this.pontuacao.incrementa()
 
-        if (pontuacao.pontos % 200 < 0.2) {
-            vidas.ganharVida()
+        if (this.pontuacao.pontos % 200 < 0.2) {
+            this.vidas.ganharVida()
         }
 
         const linhaAtualMapa = this.mapa[this.inimigoAtual]
-        const inimigo = inimigos[linhaAtualMapa.inimigo]
-        inimigo.velocidade = linhaAtualMapa.velocidade + pontuacao.pontos / 10
+        const inimigo = this.inimigos[linhaAtualMapa.inimigo]
+        inimigo.velocidade = linhaAtualMapa.velocidade + this.pontuacao.pontos / 10
 
         inimigo.exibe()
         inimigo.move()
 
-        if (personagem.estaColidindo(inimigo)) {
+        if (this.personagem.estaColidindo(inimigo)) {
             console.log("d'oh!")
-            vidas.perderVida()
+            this.vidas.perderVida()
 
-            if (vidas.quantidade < 0) {
-                image(imagemGameOver, width / 2 - 206, height / 2 - 39)
+            if (this.vidas.quantidade < 0) {
+                image(imagemGameOver, this.cenarioInfo.largura / 2 - 206, this.cenarioInfo.altura / 2 - 39)
                 noLoop()
                 somJogo.stop()
+
+                this.botao.show()
+                this.botao.position(this.cenarioInfo.largura / 2, this.cenarioInfo.altura / 7 * 5)
+                this.botao.center('horizontal')
+                this.botao.addClass('botao-tela-inicial')
+                this.botao.mousePressed(() => this.reset())
 
             }
         }
 
         if (inimigo.naoVisivel()) {
-
-            console.log(`Inimigo ID: ${this.inimigoAtual}`)
 
             this.inimigoAtual++
 
@@ -67,16 +93,34 @@ class Jogo {
                 this.inimigoAtual = 0
             }
 
+            this.inimigoAtual = Math.floor(Math.random() * this.mapa.length)
 
-            inimigo.aparece()
+            inimigo.aparece(this.cenarioInfo.largura)
 
         }
     }
 
-    keyPressed(key) {
-        if (key === UP_ARROW || key === 32) { // 32 é espaço
-            personagem.pula()
-        }
+    reset() {
+    
+        this.personagem.reset()
+
+        this.inimigos.forEach(inimigo => inimigo.reset())
+
+        this.pontuacao.reset()
+
+        this.vidas.reset()
+
+        this.botao.hide()
+
+        loop()
+
+
+    }
+
+    keyPressed() {
+        
+            this.personagem.pula()
+      
     }
 
 }

@@ -12,6 +12,17 @@ class Personagem extends Animacao {
 
     }
 
+    reset() {
+        this.velocidadePulo = 0
+        this.gravidade = 3
+
+        this.maximoPulos = 2
+        this.quantidadePulos = 0 
+        
+        this.x = this.xInicial
+        this.y = this.ground
+    }
+
     pula() {
         if (this.quantidadePulos < this.maximoPulos) {
             this.velocidadePulo = -30

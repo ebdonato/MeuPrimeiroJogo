@@ -1,11 +1,11 @@
 class MatrizSpriteGenerator {
-    constructor(colunas, linhas, largura, altura, qtd = 0) {
+    constructor(colunas, linhas, largura, altura, quantidade = 0) {
 
         this.linhas = linhas
         this.colunas = colunas
         this.largura = largura
         this.altura = altura
-        this.length = qtd || (this.linhas * this.colunas)
+        this.length = quantidade || (this.linhas * this.colunas)
 
 
     }

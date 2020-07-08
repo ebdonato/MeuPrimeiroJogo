@@ -1,7 +1,11 @@
 class Abertura {
-    constructor() {
-        this.x = width / 2;
-        this.y = height
+    constructor(aberturaInfo) {
+        this.imagem = aberturaInfo.imagem
+        this.altura = aberturaInfo.altura
+        this.largura = aberturaInfo.largura
+        this.fonte = aberturaInfo.fonte
+        
+        this.botao = createButton("Iniciar")
 
     }
 
@@ -12,7 +16,7 @@ class Abertura {
     }
 
     _fundo() {
-        image(imagemAbertura, 0, 0, width, height)
+        image(this.imagem, 0, 0, this.largura, this.altura)
     }
 
     _texto() {
@@ -21,16 +25,24 @@ class Abertura {
         stroke(245, this.opacity);
         textAlign(CENTER);
         textSize(50);
-        textFont(fonteTelaInicial);
-        text('Meu Primeiro Jogo', width / 2, height / 3);
+        textFont(this.fonte);
+        text('Meu Primeiro Jogo',  this.largura / 2, this.altura / 3);
         textSize(150);
-        text('Bananinha Linda', width / 2, height / 5 * 3);
-        textFont('Georgia')
+        text('Bananinha Linda',  this.largura / 2, this.altura / 5 * 3);
+        //textFont('Georgia')
     }
 
     _botao() {
-        botao.y = height / 7 * 5
-        botao.draw()
-      }
+        this.botao.position(this.largura / 2, this.altura / 7 * 5)
+        this.botao.center('horizontal')
+        this.botao.addClass('botao-tela-inicial')
+        this.botao.mousePressed(() => this.alteraCena())
+    }
+
+    alteraCena() {
+        this.botao.remove()
+
+        cenaAtual = 'jogo'
+    }
 
 }

@@ -7,6 +7,8 @@ class Animacao {
         this.largura = largura
         this.altura = altura
         this.x = posicaoXInicial
+        this.xInicial = posicaoXInicial
+        this.yInicial = posicaoYInicial
         this.ground = height - altura - posicaoYInicial
         this.y = this.ground
         this.larguraSprite = larguraSprite

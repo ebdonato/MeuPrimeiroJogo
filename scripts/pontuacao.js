@@ -14,5 +14,9 @@ class Pontuacao {
         this.pontos += .2    
     }
 
+    reset() {
+        this.pontos = 0
+    }
+
 
 }
