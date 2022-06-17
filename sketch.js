@@ -35,11 +35,12 @@ function keyPressed() {
 }
 
 function setup() {
-    const largura = windowWidth > 1388 ? 1388 : windowWidth
+    const largura = windowWidth > 1366 ? 1366 : windowWidth
 
-    const altura = Math.ceil((9 / 16) * windowWidth)
+    const altura = Math.floor((9 / 16) * largura)
 
     createCanvas(largura, altura)
+    console.log("🚀 ~ largura, altura", largura, altura)
 
     const cenarioInfo = {
         imagem: imagemCenario,
