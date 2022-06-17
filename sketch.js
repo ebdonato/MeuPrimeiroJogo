@@ -14,48 +14,45 @@ let cenaAtual = "inicial"
 let cenas
 
 function preload() {
-    imagemAbertura = loadImage('assets/telaInicial.png');
-    imagemCenario = loadImage('assets/floresta.png')
-    imagemGameOver = loadImage('assets/game-over.png')
-    imagemPersonagem = loadImage('assets/correndo.png')
-    imagemInimigo = loadImage('assets/gotinha.png')
-    imagemInimigoGrande = loadImage('assets/troll.png')
-    imagemInimigoVoador = loadImage('assets/gotinha-voadora.png')
-    imagemVida = loadImage('assets/coracao.png')
-    somJogo = loadSound('assets/trilha_jogo.mp3')
-    somPulo = loadSound('assets/somPulo.mp3')
+    imagemAbertura = loadImage("assets/telaInicial.png")
+    imagemCenario = loadImage("assets/floresta.png")
+    imagemGameOver = loadImage("assets/game-over.png")
+    imagemPersonagem = loadImage("assets/correndo.png")
+    imagemInimigo = loadImage("assets/gotinha.png")
+    imagemInimigoGrande = loadImage("assets/troll.png")
+    imagemInimigoVoador = loadImage("assets/gotinha-voadora.png")
+    imagemVida = loadImage("assets/coracao.png")
+    somJogo = loadSound("assets/trilha_jogo.mp3")
+    somPulo = loadSound("assets/somPulo.mp3")
 
-    config = loadJSON('config.json')
-   
-    fonteTelaInicial = loadFont('assets/fonteTelaInicial.otf');
+    config = loadJSON("config.json")
 
+    fonteTelaInicial = loadFont("assets/fonteTelaInicial.otf")
 }
 
 function keyPressed() {
     cenaJogo.keyPressed()
-
 }
 
 function setup() {
-    
-    const largura = windowWidth
+    const largura = windowWidth > 1388 ? 1388 : windowWidth
 
-    const altura = Math.floor((9/16) * windowWidth)
-   
+    const altura = Math.ceil((9 / 16) * windowWidth)
+
     createCanvas(largura, altura)
 
     const cenarioInfo = {
         imagem: imagemCenario,
         velocidade: 2,
         largura: largura,
-        altura: altura
+        altura: altura,
     }
 
     const aberturaInfo = {
         imagem: imagemAbertura,
         fonte: fonteTelaInicial,
         largura: largura,
-        altura: altura      
+        altura: altura,
     }
 
     const personagemInfo = {
@@ -68,13 +65,13 @@ function setup() {
         altura: 135,
         larguraSprite: 220,
         alturaSprite: 270,
-        som: somPulo
+        som: somPulo,
     }
 
     const vidasInfo = {
         imagem: imagemVida,
         maxima: config.vidas.maxima,
-        inicial: config.vidas.inicial
+        inicial: config.vidas.inicial,
     }
 
     cenaJogo = new Jogo(cenarioInfo, personagemInfo, vidasInfo)
@@ -87,7 +84,7 @@ function setup() {
 
     cenas = {
         jogo: cenaJogo,
-        inicial: cenaAbertura
+        inicial: cenaAbertura,
     }
 
     frameRate(40)
@@ -95,7 +92,5 @@ function setup() {
 }
 
 function draw() {
-
     cenas[cenaAtual].draw()
-
 }
