@@ -4,9 +4,8 @@ class Abertura {
         this.altura = aberturaInfo.altura
         this.largura = aberturaInfo.largura
         this.fonte = aberturaInfo.fonte
-        
-        this.botao = createButton("Iniciar")
 
+        this.botao = createButton("Iniciar")
     }
 
     draw() {
@@ -20,29 +19,28 @@ class Abertura {
     }
 
     _texto() {
-        fill(0);
-        strokeWeight(2);
-        stroke(245, this.opacity);
-        textAlign(CENTER);
-        textSize(50);
-        textFont(this.fonte);
-        text('Meu Primeiro Jogo',  this.largura / 2, this.altura / 3);
-        textSize(150);
-        text('Bananinha Linda',  this.largura / 2, this.altura / 5 * 3);
+        fill(0)
+        strokeWeight(2)
+        stroke(245, this.opacity)
+        textAlign(CENTER)
+        textSize(50)
+        textFont(this.fonte)
+        text("Meu Primeiro Jogo", this.largura / 2, this.altura / 3)
+        textSize(150)
+        text("Bruxinha Linda", this.largura / 2, (this.altura / 5) * 3)
         //textFont('Georgia')
     }
 
     _botao() {
-        this.botao.position(this.largura / 2, this.altura / 7 * 5)
-        this.botao.center('horizontal')
-        this.botao.addClass('botao-tela-inicial')
+        this.botao.position(this.largura / 2, (this.altura / 7) * 5)
+        this.botao.center("horizontal")
+        this.botao.addClass("botao-tela-inicial")
         this.botao.mousePressed(() => this.alteraCena())
     }
 
     alteraCena() {
         this.botao.remove()
 
-        cenaAtual = 'jogo'
+        cenaAtual = "jogo"
     }
-
 }
